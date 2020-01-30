@@ -32,12 +32,12 @@ public class PigBotService extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "little_pig_bot";
+        return "";
     }
 
     @Override
     public String getBotToken() {
-        return "591199063:AAHN3K8g2CNa0jBXt_HV10PuV5Gbh6Rv058";
+        return "";
     }
 
 }

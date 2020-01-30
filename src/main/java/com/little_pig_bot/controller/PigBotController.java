@@ -23,6 +23,6 @@ public class PigBotController implements TelegramMvcController {
 
     @Override
     public String getToken() {
-        return "591199063:AAHN3K8g2CNa0jBXt_HV10PuV5Gbh6Rv058";
+        return "";
     }
 }
