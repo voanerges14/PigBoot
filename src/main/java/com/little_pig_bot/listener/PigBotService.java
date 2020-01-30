@@ -29,7 +29,6 @@ public class PigBotService extends TelegramLongPollingBot {
         }
     }
 
-
     @Override
     public String getBotUsername() {
         return "";
