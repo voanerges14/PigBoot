@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:32769/postgres
+    username: postgres
+    driverClassName: org.postgresql.Driver
+
+server:
+  port: 1488
+
+connection:
+  token:
+  username: 
