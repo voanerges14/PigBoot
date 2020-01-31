@@ -12,6 +12,8 @@ public interface NoteService {
 
     List<Note> getNotes();
 
+    List<Note> getNotes(Integer userId);
+
     void saveNote(Update update);
 
 }

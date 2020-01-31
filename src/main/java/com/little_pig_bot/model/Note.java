@@ -2,11 +2,17 @@ package com.little_pig_bot.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +29,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Note {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String text;
-
-    private String username;
 
     @CreationTimestamp
     private LocalDateTime createDate;
@@ -36,4 +40,13 @@ public class Note {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Override
+    public String toString() {
+        return id + " : " + text + "\n";
+    }
 }

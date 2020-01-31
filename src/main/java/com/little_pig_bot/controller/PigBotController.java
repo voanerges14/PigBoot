@@ -4,6 +4,7 @@ import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.BotRequest;
 import com.little_pig_bot.service.NoteService;
+import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -15,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class PigBotController implements TelegramMvcController {
 
-    NoteService noteService;
+    private final NoteService noteService;
 
     @BotRequest
     public void onUpdate(Update update) {
@@ -23,8 +24,8 @@ public class PigBotController implements TelegramMvcController {
     }
 
     @BotRequest(value = "/notes")
-    public BaseRequest getNotes(Update update) {
-        return new SendMessage(update.message().chat().id(), noteService.getNotes().toString());
+    public BaseRequest getNotes(Chat chat) {
+        return new SendMessage(chat.id(), noteService.getNotes(chat.id().intValue()).toString());
     }
 
     @Override
