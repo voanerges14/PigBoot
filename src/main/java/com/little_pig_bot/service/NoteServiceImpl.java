@@ -34,6 +34,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Note> getNotes(Integer userId) {
         return noteRepository.findAllByUserId(userId);
     }

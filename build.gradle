@@ -42,3 +42,9 @@ dependencies {
 	compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 }
+
+jar {
+	manifest {
+		attributes 'LittlePigBotApplication': 'com.little_pig_bot.LittlePigBotApplication'
+	}
+}
