@@ -40,14 +40,14 @@ public class User {
     private String username;
 
     @JsonIgnore
-    @Builder.Default
     @Setter(AccessLevel.NONE)
+    @Builder.Default
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Note> notes = new HashSet<>();
 
     public void addNote(Note note) {
-        this.notes.add(note);
+        this.getNotes().add(note);
         note.setUser(this);
     }
 }

@@ -2,6 +2,8 @@ package com.little_pig_bot.service;
 
 import java.util.List;
 
+import javax.ws.rs.NotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,5 +60,25 @@ public class NoteServiceImpl implements NoteService {
 
         noteRepository.save(note);
         log.info("saving username: {} text: {}", user.getUsername(), text);
+    }
+
+    @Override
+    @Transactional
+    public void saveNote(Integer userId, String text) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(NotFoundException::new);
+
+        Note note = Note.builder().text(text).user(user).build();
+        user.addNote(note);
+
+        noteRepository.save(note);
+        log.info("saving username: {} text: {}", user.getUsername(), text);
+    }
+
+    @Override
+    public void deleteNote(Long id) {
+        if (noteRepository.existsById(id)) {
+            noteRepository.deleteById(id);
+        }
     }
 }

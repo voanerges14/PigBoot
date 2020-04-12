@@ -2,7 +2,11 @@ package com.little_pig_bot.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +26,15 @@ public class NoteController {
         return noteService.getNotes();
     }
 
+    //TODO: get user id srom tocken/session
+    // https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
+    @PostMapping
+    public void addNote(@RequestBody String text) {
+        noteService.saveNote(345598708, text);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteNote(@PathVariable Long id){
+        noteService.deleteNote(id);
+    }
 }
