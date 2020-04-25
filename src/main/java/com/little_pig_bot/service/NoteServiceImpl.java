@@ -7,6 +7,7 @@ import javax.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.little_pig_bot.model.Group;
 import com.little_pig_bot.model.Note;
 import com.little_pig_bot.model.User;
 import com.little_pig_bot.repository.NoteRepository;
@@ -38,7 +39,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     @Transactional(readOnly = true)
     public List<Note> getNotes(Integer userId) {
-        return noteRepository.findAllByUserId(userId);
+        return noteRepository.findAllByGroupUserId(userId);
     }
 
     @Override
@@ -54,25 +55,32 @@ public class NoteServiceImpl implements NoteService {
                 .build());
 
         String text = update.message().text();
+        Group group = defineGroup(user, text);
 
-        Note note = Note.builder().text(text).user(user).build();
-        user.addNote(note);
+        Note note = Note.builder().text(text).group(group).build();
+        user.addGroup(group);
 
         noteRepository.save(note);
         log.info("saving username: {} text: {}", user.getUsername(), text);
     }
 
+    private Group defineGroup(User user, String text) {
+        return new Group();
+    }
+
     @Override
     @Transactional
-    public void saveNote(Integer userId, String text) {
+    public Note saveNote(Integer userId, String text) {
         User user = userRepository.findById(userId)
             .orElseThrow(NotFoundException::new);
 
-        Note note = Note.builder().text(text).user(user).build();
-        user.addNote(note);
+        Group group = defineGroup(user, text);
 
-        noteRepository.save(note);
+        Note note = Note.builder().text(text).group(group).build();
+        user.addGroup(group);
+
         log.info("saving username: {} text: {}", user.getUsername(), text);
+        return noteRepository.save(note);
     }
 
     @Override

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pig-bot
+spec:
+  containers:
+    - name: pig-bot
+      image: gcr.io/lohika-k8s-course-272820/little-pig-bot:0.0.1
+      ports:
+        - containerPort: 80

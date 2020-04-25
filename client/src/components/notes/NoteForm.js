@@ -6,7 +6,7 @@ const NoteForm = () => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
 
-  const sendPost = e => {
+  const sendNote = e => {
     e.preventDefault();
     dispatch(addNote(text));
     setText('');
@@ -17,7 +17,7 @@ const NoteForm = () => {
         <div className="bg-primary p">
           <h3>Add note...</h3>
         </div>
-        <form className="form my-1" onSubmit={(e => sendPost(e))}>
+        <form className="form my-1" onSubmit={(e => sendNote(e))}>
         <textarea
             name="text"
             cols="30"

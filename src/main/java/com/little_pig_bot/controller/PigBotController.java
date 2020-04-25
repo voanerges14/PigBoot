@@ -1,12 +1,16 @@
 package com.little_pig_bot.controller;
 
+import com.github.kshashov.telegram.api.MessageType;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.BotPathVariable;
 import com.github.kshashov.telegram.api.bind.annotation.BotRequest;
+import com.github.kshashov.telegram.api.bind.annotation.request.CallbackQueryRequest;
 import com.github.kshashov.telegram.api.bind.annotation.request.MessageRequest;
+import com.little_pig_bot.model.Note;
 import com.little_pig_bot.service.NoteService;
 import com.pengrad.telegrambot.model.Chat;
+import com.pengrad.telegrambot.model.MessageEntity;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ParseMode;
@@ -47,7 +51,7 @@ public class PigBotController implements TelegramMvcController {
         return new SendMessage(chat.id(), "Done");
     }
 
-    @BotRequest(path = "/web")
+    @CallbackQueryRequest(path = "/web")
     public BaseRequest getWebView(Chat chat) {
         return new SendMessage(chat.id(), "<a href='http://localhost:3000/notes'>link </a>")
             .parseMode(ParseMode.HTML);
@@ -55,6 +59,6 @@ public class PigBotController implements TelegramMvcController {
 
     @Override
     public String getToken() {
-        return "";
+        return "591199063:AAHN3K8g2CNa0jBXt_HV10PuV5Gbh6Rv058";
     }
 }

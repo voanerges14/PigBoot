@@ -15,7 +15,6 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleBadRequestException(RuntimeException e, HttpServletRequest request) {
-
         return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
     }
 

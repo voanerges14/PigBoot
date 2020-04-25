@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import {
-  POST_ERROR,
+  NOTE_ERROR,
   UPDATE_LIKES,
   GET_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  GET_NOTES, ADD_NOTE, DELETE_NOTE
+  GET_NOTES,
+  ADD_NOTE,
+  DELETE_NOTE
 } from './types';
 
 // Get all notes
@@ -21,7 +23,7 @@ export const getNotes = () => async dispatch => {
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
@@ -43,7 +45,7 @@ export const getNote = postId => async dispatch => {
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
@@ -70,9 +72,9 @@ export const addNote = formData => async dispatch => {
 
     dispatch(setAlert('Note added', 'success'))
   } catch (error) {
-    dispatch(setAlert(error.response.data.msg, 'danger'))
+    dispatch(setAlert(error.response.data.msg, 'danger'));
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
@@ -93,7 +95,7 @@ export const updateLikes = (actionType, postId) => async dispatch => {
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
@@ -116,14 +118,14 @@ export const deleteNote = noteId => async dispatch => {
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
       }
     })
   }
-}
+};
 
 // Add comment to post
 export const addComment = (postId, formData) => async dispatch => {
@@ -138,20 +140,20 @@ export const addComment = (postId, formData) => async dispatch => {
     dispatch({
       type: ADD_COMMENT,
       payload: res.data
-    })
+    });
 
     dispatch(setAlert('Comment Added', 'success'))
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
       }
     })
   }
-}
+};
 
 // Remove comment to post
 export const removeComment = (postId, commentId) => async dispatch => {
@@ -167,11 +169,11 @@ export const removeComment = (postId, commentId) => async dispatch => {
   } catch (error) {
     dispatch(setAlert(error.response.data.msg, 'danger'))
     dispatch({
-      type: POST_ERROR,
+      type: NOTE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status
       }
     })
   }
-}
+};

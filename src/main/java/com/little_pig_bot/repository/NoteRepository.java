@@ -10,6 +10,6 @@ import com.little_pig_bot.model.Note;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
-    List<Note> findAllByUserId(Integer userId);
+    List<Note> findAllByGroupUserId(Integer userId);
 
 }

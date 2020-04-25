@@ -1,0 +1,42 @@
+#kubectl create namespace dev-pig-app
+#kubectl kubectl apply -f k8s/db/pssql.yaml -n dev-pig-appapiVersion: apps/v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pig-bot
+  namespace: dev-pig-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pig-bot
+    spec:
+      containers:
+        - name: pig-bot
+          image: gcr.io/lohika-k8s-course-272820/little-pig-bot:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: POSTGRES_NAME
+              value: postgres
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            failureThreshold: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            failureThreshold: 3
+            periodSeconds: 20
+      initContainers:
+        - name: check-db-ready
+          image: postgres:9.6.5
+          command: ['sh', '-c', 'until pg_isready -h postgres -p 5432; do echo waiting for database; sleep 2; done;']
+  selector:
+    matchLabels:
+      app: pig-bot

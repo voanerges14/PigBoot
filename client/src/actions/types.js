@@ -23,6 +23,8 @@ export const ADD_NOTE = 'ADD_NOTE';
 export const GET_NOTE = 'GET_NOTE';
 export const GET_NOTES = 'GET_NOTES';
 export const DELETE_NOTE = 'DELETE_NOTE';
+export const NOTE_ERROR = 'NOTE_ERROR';
+
 export const DELETE_ERROR = 'DELETE_ERROR';
 
 export const GET_POSTS = 'GET_POSTS';

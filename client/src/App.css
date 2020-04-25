@@ -40,7 +40,8 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 100px;
+  margin-top: 79px;
+  margin-bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,12 +58,14 @@ img {
 .large {
   font-size: 3rem;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .lead {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .text-center {
@@ -291,15 +294,14 @@ button {
   color: #0077b5;
 }
 */
-.table th,
+/* .table th,
 .table td {
   padding: 1rem;
   text-align: left;
 }
-
 .table th {
   background: var(--light-color);
-}
+} */
 
 /* Navbar */
 .navbar {
@@ -308,7 +310,7 @@ button {
   align-items: center;
   padding: 0.7rem 2rem;
   position: fixed;
-  z-index: 1;
+  z-index: 11;
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
@@ -361,6 +363,25 @@ button {
   padding: 1rem;
   line-height: 1.8;
   margin-bottom: 1rem;
+  transition: transform .4s;
+}
+
+.profile:hover {
+  -ms-transform: scale(1.02); /* IE 9 */
+  -webkit-transform: scale(1.02); /* Safari 3-8 */
+  transform: scale(1.02);
+}
+
+/* Dashboard Page */
+.dashboard-grid {
+  display: grid;
+  grid-template-areas:
+    'top'
+    'about'
+    'exp'
+    'github';
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
 }
 
 /* Profile Page */
@@ -421,8 +442,8 @@ button {
   margin-bottom: 1rem;
 }
 
-.profile-exp > div,
-.profile-edu > div {
+.profile .profile-exp > div,
+.profile .profile-edu > div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;

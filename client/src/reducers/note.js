@@ -3,9 +3,9 @@ import {
   GET_NOTE,
   GET_NOTES,
   DELETE_NOTE,
+  NOTE_ERROR,
   DELETE_ERROR,
   ADD_POST,
-  POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
   GET_POST,
@@ -36,9 +36,9 @@ export default function (state = initialState, action) {
         ...state,
         note: payload,
         loading: false
-      }
+      };
 
-    case ADD_POST:
+    case ADD_NOTE:
       return {
         ...state,
         notes: [payload, ...state.notes],
@@ -59,14 +59,14 @@ export default function (state = initialState, action) {
           ...note, likes: payload.likes
         } : note),
         loading: false
-      }
+      };
 
     case ADD_COMMENT:
       return {
         ...state,
         note: {...state.note, comments: payload},
         loading: false
-      }
+      };
 
     case DELETE_COMMENT:
       return {
@@ -78,13 +78,14 @@ export default function (state = initialState, action) {
           )
         },
         loading: false
-      }
-    case POST_ERROR:
+      };
+
+    case NOTE_ERROR:
       return {
         ...state,
         loading: false,
         error: payload
-      }
+      };
 
     case CLEAR_ALL_POSTS:
       return initialState;

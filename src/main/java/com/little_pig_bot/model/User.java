@@ -42,12 +42,11 @@ public class User {
     @JsonIgnore
     @Setter(AccessLevel.NONE)
     @Builder.Default
-    @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Note> notes = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Group> groups = new HashSet<>();
 
-    public void addNote(Note note) {
-        this.getNotes().add(note);
+    public void addGroup(Group note) {
+        this.getGroups().add(note);
         note.setUser(this);
     }
 }

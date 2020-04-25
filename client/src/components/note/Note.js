@@ -21,9 +21,9 @@ const Note = ({ match }) => {
       <Link to="/posts" className="btn">Back To Posts</Link>
       <NoteItem note={note} showActions={false} />
       <CommentForm postId={note.id} />
-      {/*<div className="comments">*/}
-      {/*  {post.comments.map(comment => <CommentItem key={comment._id} comment={comment} postId={post._id} />)}*/}
-      {/*</div>*/}
+      <div className="comments">
+        {note.comments.map(comment => <CommentItem key={comment.id} comment={comment} postId={note.id} />)}
+      </div>
     </Fragment>
 }
 

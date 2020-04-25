@@ -29,8 +29,8 @@ public class NoteController {
     //TODO: get user id srom tocken/session
     // https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
     @PostMapping
-    public void addNote(@RequestBody String text) {
-        noteService.saveNote(345598708, text);
+    public Note addNote(@RequestBody String text) {
+        return noteService.saveNote(345598708, text);
     }
 
     @DeleteMapping("/{id}")

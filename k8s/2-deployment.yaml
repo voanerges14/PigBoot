@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pig-bot
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: pig-bot
+    spec:
+      containers:
+        - name: pig-bot
+          image: gcr.io/lohika-k8s-course-272820/little-pig-bot:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 5
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+  selector:
+    matchLabels:
+      app: pig-bot
