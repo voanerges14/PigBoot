@@ -15,6 +15,9 @@ spec:
           image: postgres:latest
           ports:
             - containerPort: 5432
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: postgresdb
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -52,6 +55,10 @@ spec:
               port: 8080
             initialDelaySeconds: 15
             periodSeconds: 20
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
   selector:
     matchLabels:
       app: postgres
@@ -68,3 +75,35 @@ spec:
       targetPort: 5432
   selector:
     app: postgres
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv-volume
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/postgres"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
